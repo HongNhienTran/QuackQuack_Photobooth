@@ -1,26 +1,95 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --console-blue: #c3e2f9;
+    --console-border: #9ec8ee;
+    --console-glow: rgba(126, 195, 243, 0.4);
+    --heart-pink: #ff4766;
+    --pill-bg: #f5faff;
+  }
+
+  body {
+    background: radial-gradient(circle at 50% 20%, #e6f3fd 0%, #cae3f8 50%, #b2d5f4 100%);
+    color: #2b4560;
+    min-height: 100vh;
+    overflow-x: hidden;
+    user-select: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Y2K Bevel and Console Styling */
+.y2k-console-outer {
+  background: linear-gradient(180deg, #dcf0fe 0%, #cae4fa 40%, #b8dbf7 100%);
+  border: 4px solid #ffffff;
+  box-shadow: 
+    0 12px 35px rgba(65, 128, 185, 0.25),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
+    inset 0 -3px 6px rgba(100, 160, 215, 0.4);
+}
+
+.y2k-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 2px solid #bce0fb;
+  box-shadow: 
+    0 4px 16px rgba(135, 185, 230, 0.18),
+    inset 0 1px 2px #ffffff;
+}
+
+.y2k-pill-btn {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 
+    0 3px 8px rgba(90, 150, 205, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.y2k-pill-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 6px 14px rgba(90, 150, 205, 0.28),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+}
+
+.y2k-pill-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Vinyl Spinning Animation */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.vinyl-spinning {
+  animation: spinSlow 3.5s linear infinite;
+}
+
+/* Vent lines (Slits on console sides) */
+.console-vent {
+  background: repeating-linear-gradient(
+    180deg,
+    #9dc9ee 0px,
+    #9dc9ee 3px,
+    transparent 3px,
+    transparent 7px
+  );
+}
+
+/* Custom Scrollbar for cute UI */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #e1effb;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb {
+  background: #a1cdef;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7bb5e3;
 }
