@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, Camera, Target, Trophy, Sparkles } from 'lucide-react';
+import { Volume2, VolumeX, Camera } from 'lucide-react';
 import { sounds } from '@/utils/audio';
 
 interface ConsoleHeaderProps {
@@ -42,11 +42,11 @@ export const ConsoleHeader: React.FC<ConsoleHeaderProps> = ({
     }
   };
 
-  const navItems = [
+  const navItems: { id: 'photobooth' | 'duckhunt' | 'trophy'; label: string; icon?: typeof Camera }[] = [
     { id: 'photobooth', label: 'Photobooth', icon: Camera },
-    { id: 'duckhunt', label: 'Duck Hunt', icon: Target },
-    { id: 'trophy', label: 'Thành Tích', icon: Trophy },
-  ] as const;
+    { id: 'duckhunt', label: 'Duck Hunt' },
+    { id: 'trophy', label: 'Thành Tích' },
+  ];
 
   const isScrolled = scrollRatio > 0.05;
 
@@ -91,12 +91,12 @@ export const ConsoleHeader: React.FC<ConsoleHeaderProps> = ({
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/Logo_QuackQuack.png"
-            alt="Quack Studio Logo"
+            src="/Mascot.png"
+            alt="QuackQuack Studio Logo"
             className="w-8 h-8 rounded-lg object-contain shadow-xs group-hover:scale-105 transition-transform"
           />
           <span className="text-base font-extrabold tracking-tight text-[#14151c] font-sans">
-            Quack<span className="text-[#8b5cf6]">.</span>studio
+            QuackQuack<span className="text-[#8b5cf6]"> </span>Studio
           </span>
         </div>
 
@@ -120,7 +120,7 @@ export const ConsoleHeader: React.FC<ConsoleHeaderProps> = ({
                     : 'text-[#474f63] hover:text-[#121218] hover:bg-white/60'
                 }`}
               >
-                <Icon className="w-3.5 h-3.5" />
+                {Icon && <Icon className="w-3.5 h-3.5" />}
                 <span>{item.label}</span>
               </button>
             );

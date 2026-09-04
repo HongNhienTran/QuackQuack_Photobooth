@@ -125,9 +125,9 @@ export const Photobooth: React.FC<PhotoboothProps> = ({ bonusBadge, onPhotoSaved
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
         videoRef.current.onloadedmetadata = () => {
-          videoRef.current?.play().catch(() => {});
+          videoRef.current?.play().catch(() => { });
         };
-        videoRef.current.play().catch(() => {});
+        videoRef.current.play().catch(() => { });
         setCameraActive(true);
       }
     } catch (err) {
@@ -269,7 +269,7 @@ export const Photobooth: React.FC<PhotoboothProps> = ({ bonusBadge, onPhotoSaved
     setPhotoData(null);
     setLoadedImage(null);
     if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().catch(() => { });
     }
   };
 
@@ -879,17 +879,17 @@ export const Photobooth: React.FC<PhotoboothProps> = ({ bonusBadge, onPhotoSaved
     });
 
     const link = document.createElement('a');
-    link.download = `QuackBooth_${Date.now()}.png`;
+    link.download = `QuackQuack_Studio_${Date.now()}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
     onPhotoSaved();
   };
 
   const frames: { id: FrameType; label: string; badge?: string }[] = [
-    { id: 'birthday', label: '🎂 Sinh Nhật', badge: 'Mới' },
-    { id: 'crimson', label: '🎵 Crimson Player', badge: 'Mới' },
-    { id: 'ocean', label: '🌊 Ocean Blue', badge: 'Mới' },
-    { id: 'cherry', label: '🍒 Cherry Coquette', badge: 'Mới' },
+    { id: 'birthday', label: 'Sinh Nhật', badge: 'Mới' },
+    { id: 'crimson', label: 'Crimson Player', badge: 'Mới' },
+    { id: 'ocean', label: 'Ocean Blue', badge: 'Mới' },
+    { id: 'cherry', label: 'Cherry Coquette', badge: 'Mới' },
     { id: 'console', label: 'Console Y2K' },
     { id: 'photocard', label: 'Idol Card' },
     { id: 'polaroid', label: 'Polaroid 90s' },
@@ -909,7 +909,7 @@ export const Photobooth: React.FC<PhotoboothProps> = ({ bonusBadge, onPhotoSaved
     <div className="flex-1 flex flex-col lg:flex-row gap-8 items-start w-full">
       {/* Left Column: Camera Feed & Creative Controls (Open, borderless layout) */}
       <div className="w-full lg:w-7/12 flex flex-col gap-6">
-        
+
         {/* Camera Live Preview or Snapshot Box */}
         <div className="flex flex-col gap-3.5 w-full">
           <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-neutral-950 shadow-xl flex items-center justify-center border border-white/40">
@@ -919,9 +919,8 @@ export const Photobooth: React.FC<PhotoboothProps> = ({ bonusBadge, onPhotoSaved
               autoPlay
               playsInline
               muted
-              className={`w-full h-full object-cover transform -scale-x-100 ${
-                photoData ? 'hidden' : 'block'
-              }`}
+              className={`w-full h-full object-cover transform -scale-x-100 ${photoData ? 'hidden' : 'block'
+                }`}
             />
 
             {/* Flash Effect */}
@@ -1003,15 +1002,12 @@ export const Photobooth: React.FC<PhotoboothProps> = ({ bonusBadge, onPhotoSaved
 
         {/* Customization Options (Open, spacious sections without rigid border enclose) */}
         <div className="flex flex-col gap-5 pt-2">
-          
+
           {/* Frame Selection */}
           <div>
             <div className="flex items-center justify-between mb-2.5 px-1">
               <span className="text-xs font-extrabold text-[#373d4d] uppercase tracking-wider">
                 1. Kiểu Khung Nghệ Thuật
-              </span>
-              <span className="text-[11px] text-[#717a8e] font-semibold">
-                9 phong cách studio (4 mẫu mới)
               </span>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -1022,17 +1018,15 @@ export const Photobooth: React.FC<PhotoboothProps> = ({ bonusBadge, onPhotoSaved
                     sounds.playPop();
                     setSelectedFrame(frame.id);
                   }}
-                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all border flex items-center justify-center gap-1.5 ${
-                    selectedFrame === frame.id
-                      ? 'bg-[#121218] text-white border-[#121218] shadow-xs'
-                      : 'bg-white/50 text-[#444c5f] border-white/70 hover:bg-white/80'
-                  }`}
+                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all border flex items-center justify-center gap-1.5 ${selectedFrame === frame.id
+                    ? 'bg-[#121218] text-white border-[#121218] shadow-xs'
+                    : 'bg-white/50 text-[#444c5f] border-white/70 hover:bg-white/80'
+                    }`}
                 >
                   <span>{frame.label}</span>
                   {frame.badge && (
-                    <span className={`text-[9px] font-extrabold px-1.5 py-0.2 rounded-md ${
-                      selectedFrame === frame.id ? 'bg-[#ec4899] text-white' : 'bg-pink-100 text-[#db2777]'
-                    }`}>
+                    <span className={`text-[9px] font-extrabold px-1.5 py-0.2 rounded-md ${selectedFrame === frame.id ? 'bg-[#ec4899] text-white' : 'bg-pink-100 text-[#db2777]'
+                      }`}>
                       {frame.badge}
                     </span>
                   )}
@@ -1047,9 +1041,6 @@ export const Photobooth: React.FC<PhotoboothProps> = ({ bonusBadge, onPhotoSaved
               <span className="text-xs font-extrabold text-[#373d4d] uppercase tracking-wider">
                 2. Bộ Lọc Màu Điện Ảnh
               </span>
-              <span className="text-[11px] text-[#717a8e] font-semibold">
-                Ánh sáng & Phối màu
-              </span>
             </div>
             <div className="flex flex-wrap gap-2">
               {filters.map((f) => (
@@ -1059,11 +1050,10 @@ export const Photobooth: React.FC<PhotoboothProps> = ({ bonusBadge, onPhotoSaved
                     sounds.playPop();
                     setSelectedFilter(f.id);
                   }}
-                  className={`py-1.5 px-3.5 rounded-lg text-xs font-bold transition-all border ${
-                    selectedFilter === f.id
-                      ? 'bg-[#8b5cf6] text-white border-[#8b5cf6] shadow-xs'
-                      : 'bg-white/50 text-[#444c5f] border-white/70 hover:bg-white/80'
-                  }`}
+                  className={`py-1.5 px-3.5 rounded-lg text-xs font-bold transition-all border ${selectedFilter === f.id
+                    ? 'bg-[#8b5cf6] text-white border-[#8b5cf6] shadow-xs'
+                    : 'bg-white/50 text-[#444c5f] border-white/70 hover:bg-white/80'
+                    }`}
                 >
                   {f.label}
                 </button>
@@ -1089,14 +1079,9 @@ export const Photobooth: React.FC<PhotoboothProps> = ({ bonusBadge, onPhotoSaved
           {/* 4. Sticker Decoration Gallery */}
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between px-1">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-extrabold text-[#373d4d] uppercase tracking-wider">
-                  4. Nhãn Dán Trang Trí (Stickers)
-                </span>
-                <span className="text-[10px] font-bold text-[#8b5cf6] bg-purple-50/90 px-2 py-0.5 rounded-md border border-purple-100">
-                  {AVAILABLE_STICKERS.length} sticker
-                </span>
-              </div>
+              <span className="text-xs font-extrabold text-[#373d4d] uppercase tracking-wider">
+                4. Nhãn Dán Trang Trí (Stickers)
+              </span>
 
               {stickers.length > 0 && (
                 <button
@@ -1176,31 +1161,23 @@ export const Photobooth: React.FC<PhotoboothProps> = ({ bonusBadge, onPhotoSaved
                 </button>
               ))}
             </div>
-
-            <p className="text-[11px] text-[#6b7388] px-1 flex items-center gap-1.5">
-              <Sparkles className="w-3 h-3 text-[#8b5cf6] flex-shrink-0" />
-              <span>Bấm vào sticker để dán lên ảnh, kéo thả tự do trên khung ảnh bên phải.</span>
-            </p>
           </div>
 
         </div>
       </div>
 
-      {/* Right Column: Realtime Canvas Output & Download (Clean, open presentation) */}
-      <div className="w-full lg:w-5/12 flex flex-col gap-4 items-center lg:items-start">
-        
+      {/* Right Column: Realtime Canvas Output & Download (Sticky on desktop, strictly constrained within Photobooth container) */}
+      <div className="w-full lg:w-5/12 flex flex-col gap-3.5 items-center lg:items-start lg:sticky lg:top-20 self-start">
+
         {/* Output Header Status */}
-        <div className={`flex items-center justify-between w-full ${['birthday', 'crimson', 'ocean', 'cherry'].includes(selectedFrame) ? 'max-w-[390px] xl:max-w-[430px]' : 'max-w-[460px] xl:max-w-[500px]'} px-1`}>
+        <div className={`flex items-center justify-between w-full ${['birthday', 'crimson', 'ocean', 'cherry'].includes(selectedFrame) ? 'max-w-[440px] xl:max-w-[500px]' : 'max-w-[500px] xl:max-w-[580px]'} px-1`}>
           <span className="text-xs font-extrabold text-[#373d4d] uppercase tracking-wider">
             Khung Ảnh Thành Phẩm
           </span>
-          <span className="text-[10px] font-bold text-[#8b5cf6] bg-purple-50/90 px-2.5 py-0.5 rounded-md border border-purple-100">
-            Preview 4K {['birthday', 'crimson', 'ocean', 'cherry'].includes(selectedFrame) ? '• 9:16' : '• 4:5'}
-          </span>
         </div>
 
-        {/* Large Crisp Canvas Box (Borderless open presentation) */}
-        <div className={`relative w-full ${['birthday', 'crimson', 'ocean', 'cherry'].includes(selectedFrame) ? 'max-w-[390px] xl:max-w-[430px] aspect-[9/16]' : 'max-w-[460px] xl:max-w-[500px] aspect-[4/5]'} rounded-2xl overflow-hidden border border-white/90 shadow-2xl bg-white transition-all duration-300 flex items-center justify-center`}>
+        {/* Large Crisp Canvas Box (Borderless open presentation, fits viewport smoothly when sticky) */}
+        <div className={`relative w-full ${['birthday', 'crimson', 'ocean', 'cherry'].includes(selectedFrame) ? 'max-w-[440px] xl:max-w-[500px] aspect-[9/16]' : 'max-w-[500px] xl:max-w-[580px] aspect-[4/5]'} max-h-[calc(100vh-13.5rem)] rounded-2xl overflow-hidden border border-white/90 shadow-2xl bg-white transition-all duration-300 flex items-center justify-center`}>
           <canvas
             ref={canvasRef}
             onMouseDown={handleCanvasMouseDown}
@@ -1209,17 +1186,17 @@ export const Photobooth: React.FC<PhotoboothProps> = ({ bonusBadge, onPhotoSaved
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            className="w-full h-full block cursor-grab active:cursor-grabbing touch-none"
+            className="w-full h-full block cursor-grab active:cursor-grabbing touch-none object-contain"
           />
         </div>
 
         {/* Download Action Button */}
         <button
           onClick={handleDownload}
-          className={`dark-pill-btn w-full ${['birthday', 'crimson', 'ocean', 'cherry'].includes(selectedFrame) ? 'max-w-[390px] xl:max-w-[430px]' : 'max-w-[460px] xl:max-w-[500px]'} py-3.5 px-6 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md hover:scale-[1.01]`}
+          className={`dark-pill-btn w-full ${['birthday', 'crimson', 'ocean', 'cherry'].includes(selectedFrame) ? 'max-w-[440px] xl:max-w-[500px]' : 'max-w-[500px] xl:max-w-[580px]'} py-3.5 px-6 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md hover:scale-[1.01]`}
         >
           <Download className="w-4 h-4 text-[#fda4af]" />
-          TẢI ẢNH VỀ MÁY (PNG SẮC NÉT)
+          TẢI ẢNH VỀ MÁY
         </button>
       </div>
     </div>

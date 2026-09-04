@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-ibm-plex-sans), 'IBM Plex Sans', sans-serif;
+}
+
 @layer base {
   :root {
     --brand-primary: #121218;
@@ -17,7 +21,7 @@
     background-color: #e9dcfa;
     background-image: 
       radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 245, 250, 0.15) 60%, rgba(220, 210, 250, 0.3) 100%),
-      url('/images/neurva_horizon_bg.jpg');
+      url('/images/neurva_horizon_bg.jpg?v=4');
     background-repeat: no-repeat;
     background-position: center top;
     background-size: cover;
@@ -25,8 +29,21 @@
     color: #1a1e29;
     min-height: 100vh;
     overflow-x: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-ibm-plex-sans), 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
+}
+
+/* Editorial Modern Rectilinear Aesthetics - Zero Rounded Corners (Anti-AI generic) */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
+/* Maintain circular shape only for the turntable phonograph disc */
+.vinyl-disc,
+.vinyl-disc * {
+  border-radius: 9999px !important;
 }
 
 /* Surreal Floating Glassmorphic System (Inspired by Neurva) */

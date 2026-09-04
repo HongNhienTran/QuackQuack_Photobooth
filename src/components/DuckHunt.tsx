@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { Target, Play, RotateCcw, Zap, Award, Sparkles, Camera } from 'lucide-react';
 import { sounds } from '@/utils/audio';
 import confetti from 'canvas-confetti';
 
@@ -601,17 +600,13 @@ export const DuckHunt: React.FC<DuckHuntProps> = ({
       <div className="glass-panel rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3 shadow-sm">
         {/* Score & Combo */}
         <div className="flex items-center gap-3">
-          <div className="px-3.5 py-2 rounded-xl bg-[#121218] text-white shadow-xs flex items-center gap-2.5 border border-white/10">
-            <Award className="w-4 h-4 text-amber-300" />
-            <div>
-              <span className="text-[9px] uppercase tracking-wider font-extrabold text-neutral-400 block leading-none">Điểm Số</span>
-              <span className="text-lg font-black tracking-wider leading-none text-white">{score}</span>
-            </div>
+          <div className="px-4 py-2 rounded-xl bg-[#121218] text-white shadow-xs border border-white/10">
+            <span className="text-[10px] uppercase tracking-wider font-extrabold text-neutral-400 block leading-none">Điểm Số</span>
+            <span className="text-lg font-black tracking-wider leading-tight text-white">{score}</span>
           </div>
 
           {combo > 1 && (
-            <div className="px-3 py-1 rounded-lg bg-gradient-to-r from-[#ec4899] to-[#8b5cf6] text-white font-extrabold text-xs shadow-xs flex items-center gap-1.5 animate-bounce">
-              <Zap className="w-3.5 h-3.5 fill-current" />
+            <div className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#ec4899] to-[#8b5cf6] text-white font-extrabold text-xs shadow-xs animate-bounce">
               <span>COMBO x{combo}!</span>
             </div>
           )}
@@ -671,9 +666,6 @@ export const DuckHunt: React.FC<DuckHuntProps> = ({
         {/* Overlay when game has not started */}
         {!isPlaying && !gameOver && (
           <div className="absolute inset-0 bg-black/40 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center text-white select-none">
-            <div className="w-12 h-12 rounded-xl bg-white/20 border border-white/40 flex items-center justify-center mb-3 shadow-md">
-              <Target className="w-6 h-6 text-amber-300" />
-            </div>
             <h2 className="text-2xl sm:text-3xl font-black mb-1.5 drop-shadow-md tracking-tight">
               DUCK HUNT ARCADE
             </h2>
@@ -682,9 +674,8 @@ export const DuckHunt: React.FC<DuckHuntProps> = ({
             </p>
             <button
               onClick={startGame}
-              className="dark-pill-btn px-7 py-3 rounded-xl font-bold text-sm flex items-center gap-2 hover:scale-102"
+              className="dark-pill-btn px-7 py-3 rounded-xl font-bold text-sm hover:scale-102"
             >
-              <Play className="w-4 h-4 fill-current text-[#fda4af]" />
               Bắt Đầu Lượt Chơi
             </button>
           </div>
@@ -715,9 +706,8 @@ export const DuckHunt: React.FC<DuckHuntProps> = ({
             <div className="flex flex-wrap items-center justify-center gap-3">
               <button
                 onClick={startGame}
-                className="px-5 py-2.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm flex items-center gap-2 border border-white/40"
+                className="px-5 py-2.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm border border-white/40 hover:scale-105 transition-transform"
               >
-                <RotateCcw className="w-4 h-4" />
                 Chơi Lại
               </button>
 
@@ -727,9 +717,8 @@ export const DuckHunt: React.FC<DuckHuntProps> = ({
                   const title = score > 1500 ? 'Huyền Thoại Bắn Vịt' : score > 800 ? 'Thiện Xạ Bách Phát' : 'Thợ Săn Tập Sự';
                   onSendToPhotobooth(score, title);
                 }}
-                className="dark-pill-btn px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2"
+                className="dark-pill-btn px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm hover:scale-105 transition-transform"
               >
-                <Camera className="w-4 h-4 text-[#ec4899]" />
                 Chụp Ảnh Cùng Kỷ Lục
               </button>
             </div>

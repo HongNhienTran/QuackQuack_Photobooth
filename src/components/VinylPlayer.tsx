@@ -74,7 +74,7 @@ export const VinylPlayer: React.FC = () => {
     playTrack(prevIdx, isPlaying);
   }, [currentIndex, playlist.length, isPlaying, playTrack]);
 
-  // Initialize Audio
+  // Initialize Audio & Automatic Playback on Load
   useEffect(() => {
     const audio = new Audio();
     audio.volume = 0.6;
@@ -97,7 +97,44 @@ export const VinylPlayer: React.FC = () => {
       audio.src = playlist[0].src;
     }
 
+    const cleanupListeners = () => {
+      window.removeEventListener('click', triggerStart);
+      window.removeEventListener('keydown', triggerStart);
+      window.removeEventListener('touchstart', triggerStart);
+      window.removeEventListener('scroll', triggerStart);
+      window.removeEventListener('mousemove', triggerStart);
+    };
+
+    const triggerStart = () => {
+      if (audioRef.current) {
+        audioRef.current
+          .play()
+          .then(() => {
+            setIsPlaying(true);
+            cleanupListeners();
+          })
+          .catch(() => {});
+      }
+    };
+
+    // 1. Direct autoplay attempt as soon as the page opens
+    audio
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch(() => {
+        // 2. If browser autoplay policy blocks unmuted audio before user gesture,
+        // start playback immediately on the very first touch, click, scroll or mouse movement
+        window.addEventListener('click', triggerStart, { once: true });
+        window.addEventListener('keydown', triggerStart, { once: true });
+        window.addEventListener('touchstart', triggerStart, { once: true });
+        window.addEventListener('scroll', triggerStart, { once: true });
+        window.addEventListener('mousemove', triggerStart, { once: true });
+      });
+
     return () => {
+      cleanupListeners();
       audio.pause();
       audio.src = '';
     };
@@ -163,7 +200,7 @@ export const VinylPlayer: React.FC = () => {
           title={isPlaying ? 'Bấm để Tạm dừng' : 'Bấm để Phát nhạc'}
         >
           {/* Turntable Platter Base */}
-          <div className="relative w-12 h-12 rounded-full bg-[#1e232d] border border-neutral-700 shadow-md flex items-center justify-center">
+          <div className="vinyl-disc relative w-12 h-12 rounded-full bg-[#1e232d] border border-neutral-700 shadow-md flex items-center justify-center">
             {/* Spinning Vinyl Record */}
             <div
               className={`w-11 h-11 rounded-full bg-[#111216] border border-neutral-600/60 flex items-center justify-center transition-transform ${
@@ -178,14 +215,6 @@ export const VinylPlayer: React.FC = () => {
                 </div>
               </div>
             </div>
-
-            {/* Live Playing Note Badge */}
-            {isPlaying && (
-              <span className="absolute -top-0.5 -left-0.5 flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#8b5cf6]"></span>
-              </span>
-            )}
           </div>
 
           {/* Realistic Metallic Tonearm (Thanh quay / Cần kim đĩa than) */}
