@@ -2,94 +2,142 @@
 
 @layer base {
   :root {
-    --console-blue: #c3e2f9;
-    --console-border: #9ec8ee;
-    --console-glow: rgba(126, 195, 243, 0.4);
-    --heart-pink: #ff4766;
-    --pill-bg: #f5faff;
+    --brand-primary: #121218;
+    --glass-bg: rgba(255, 255, 255, 0.48);
+    --glass-border: rgba(255, 255, 255, 0.85);
+    --accent-purple: #8b5cf6;
+    --accent-peach: #fda4af;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    background: radial-gradient(circle at 50% 20%, #e6f3fd 0%, #cae3f8 50%, #b2d5f4 100%);
-    color: #2b4560;
+    background-color: #e9dcfa;
+    background-image: 
+      radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 245, 250, 0.15) 60%, rgba(220, 210, 250, 0.3) 100%),
+      url('/images/neurva_horizon_bg.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #1a1e29;
     min-height: 100vh;
     overflow-x: hidden;
-    user-select: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   }
 }
 
-/* Y2K Bevel and Console Styling */
-.y2k-console-outer {
-  background: linear-gradient(180deg, #dcf0fe 0%, #cae4fa 40%, #b8dbf7 100%);
-  border: 4px solid #ffffff;
+/* Surreal Floating Glassmorphic System (Inspired by Neurva) */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.88);
   box-shadow: 
-    0 12px 35px rgba(65, 128, 185, 0.25),
-    inset 0 2px 4px rgba(255, 255, 255, 0.9),
-    inset 0 -3px 6px rgba(100, 160, 215, 0.4);
+    0 24px 64px rgba(90, 80, 140, 0.09),
+    0 4px 20px rgba(120, 110, 170, 0.05),
+    inset 0 1px 2px rgba(255, 255, 255, 0.95);
 }
 
-.y2k-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  border: 2px solid #bce0fb;
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow: 
-    0 4px 16px rgba(135, 185, 230, 0.18),
-    inset 0 1px 2px #ffffff;
+    0 12px 36px rgba(90, 80, 140, 0.06),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.95);
 }
 
-.y2k-pill-btn {
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 
-    0 3px 8px rgba(90, 150, 205, 0.2),
-    inset 0 2px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+.glass-nav {
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 40px rgba(80, 70, 130, 0.08);
 }
 
-.y2k-pill-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 
-    0 6px 14px rgba(90, 150, 205, 0.28),
-    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+.glass-badge {
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 24px rgba(90, 80, 140, 0.05);
 }
 
-.y2k-pill-btn:active {
-  transform: translateY(1px) scale(0.98);
+.glass-pill-btn {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Vinyl Spinning Animation */
+.glass-pill-btn:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(90, 80, 140, 0.12);
+}
+
+.glass-pill-btn:active {
+  transform: translateY(0.5px);
+}
+
+.dark-pill-btn {
+  background: #111116;
+  color: #ffffff;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px rgba(18, 18, 24, 0.25);
+}
+
+.dark-pill-btn:hover {
+  background: #22222c;
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 26px rgba(18, 18, 24, 0.38);
+}
+
+.dark-pill-btn:active {
+  transform: translateY(0.5px);
+}
+
+/* Floating Animations */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(3deg); }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-10px) translateX(6px); }
+}
+
+.floating-orb-1 {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.floating-orb-2 {
+  animation: floatGentle 10s ease-in-out infinite;
+}
+
+/* Vinyl Rotation */
 @keyframes spinSlow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
 .vinyl-spinning {
-  animation: spinSlow 3.5s linear infinite;
+  animation: spinSlow 3.8s linear infinite;
 }
 
-/* Vent lines (Slits on console sides) */
-.console-vent {
-  background: repeating-linear-gradient(
-    180deg,
-    #9dc9ee 0px,
-    #9dc9ee 3px,
-    transparent 3px,
-    transparent 7px
-  );
-}
-
-/* Custom Scrollbar for cute UI */
+/* Custom Minimalist Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #e1effb;
-  border-radius: 999px;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #a1cdef;
+  background: rgba(180, 170, 210, 0.4);
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #7bb5e3;
+  background: rgba(140, 130, 180, 0.6);
 }

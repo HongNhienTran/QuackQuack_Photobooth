@@ -13,8 +13,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "QuackBooth & Hunt - Y2K Cyber Console Photobooth & Game Bắn Vịt",
-  description: "Trải nghiệm chụp ảnh photobooth vui nhộn cùng game bắn vịt cổ điển Java phong cách Y2K Cyber Console!",
+  title: "Quack Studio - Photobooth & Arcade Hub",
+  description: "Trải nghiệm chụp ảnh photobooth nghệ thuật cùng game bắn vịt cổ điển 60 FPS trong không gian mở siêu thực.",
+  icons: {
+    icon: [
+      { url: "/Logo_QuackQuack.png" },
+      { url: "/icon.png" },
+    ],
+    shortcut: "/Logo_QuackQuack.png",
+    apple: "/Logo_QuackQuack.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

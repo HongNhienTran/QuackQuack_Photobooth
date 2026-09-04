@@ -596,21 +596,21 @@ export const DuckHunt: React.FC<DuckHuntProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col gap-3 max-w-4xl mx-auto w-full">
+    <div className="flex-1 flex flex-col gap-4 w-full">
       {/* Console Top Dashboard */}
-      <div className="y2k-panel rounded-2xl p-3 flex flex-wrap items-center justify-between gap-3 shadow-sm border border-[#bce0fb]">
+      <div className="glass-panel rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3 shadow-sm">
         {/* Score & Combo */}
         <div className="flex items-center gap-3">
-          <div className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#5daeec] to-[#3a93d8] text-white shadow-sm flex items-center gap-2">
-            <Award className="w-4 h-4 text-yellow-300" />
+          <div className="px-3.5 py-2 rounded-xl bg-[#121218] text-white shadow-xs flex items-center gap-2.5 border border-white/10">
+            <Award className="w-4 h-4 text-amber-300" />
             <div>
-              <span className="text-[10px] uppercase font-bold opacity-80 block leading-none">Điểm Số</span>
-              <span className="text-lg font-black tracking-wider leading-none">{score}</span>
+              <span className="text-[9px] uppercase tracking-wider font-extrabold text-neutral-400 block leading-none">Điểm Số</span>
+              <span className="text-lg font-black tracking-wider leading-none text-white">{score}</span>
             </div>
           </div>
 
           {combo > 1 && (
-            <div className="px-2.5 py-1 rounded-xl bg-pink-500 text-white font-black text-xs animate-bounce shadow-sm flex items-center gap-1">
+            <div className="px-3 py-1 rounded-lg bg-gradient-to-r from-[#ec4899] to-[#8b5cf6] text-white font-extrabold text-xs shadow-xs flex items-center gap-1.5 animate-bounce">
               <Zap className="w-3.5 h-3.5 fill-current" />
               <span>COMBO x{combo}!</span>
             </div>
@@ -618,24 +618,24 @@ export const DuckHunt: React.FC<DuckHuntProps> = ({
         </div>
 
         {/* Time Remaining */}
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white border border-[#bde0fa]">
-          <span className="text-xs font-bold text-[#456d92]">Thời Gian:</span>
-          <span className={`text-base font-black ${timeLeft <= 10 ? 'text-red-500 animate-ping' : 'text-[#285d88]'}`}>
+        <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/70 border border-white/90 shadow-xs">
+          <span className="text-xs font-bold text-[#565f74]">Thời Gian:</span>
+          <span className={`text-base font-black ${timeLeft <= 10 ? 'text-red-500 animate-ping' : 'text-[#121218]'}`}>
             {timeLeft}s
           </span>
         </div>
 
         {/* Ammo & Reload Button */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1 bg-[#edf6fd] px-2.5 py-1.5 rounded-xl border border-[#c1e2fa]">
-            <span className="text-xs font-bold text-[#4c7398] mr-1">Đạn:</span>
+          <div className="flex items-center gap-1.5 bg-white/60 px-3 py-2 rounded-xl border border-white/80 shadow-xs">
+            <span className="text-xs font-bold text-[#565f74] mr-1">Đạn:</span>
             {Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
-                className={`w-3 h-6 rounded-sm border transition-all duration-200 ${
+                className={`w-3.5 h-6 rounded-md transition-all duration-200 ${
                   i < ammo
-                    ? 'bg-gradient-to-t from-amber-500 to-yellow-300 border-amber-600 shadow-sm'
-                    : 'bg-gray-200 border-gray-300 opacity-40'
+                    ? 'bg-gradient-to-t from-amber-500 to-amber-300 border border-amber-600 shadow-xs'
+                    : 'bg-neutral-200 border border-neutral-300 opacity-30'
                 }`}
               />
             ))}
@@ -644,10 +644,10 @@ export const DuckHunt: React.FC<DuckHuntProps> = ({
           <button
             onClick={reloadAmmo}
             disabled={ammo === 6 || isReloading}
-            className={`y2k-pill-btn px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all border ${
+            className={`px-3.5 py-2 rounded-lg text-xs font-bold tracking-wider transition-all border ${
               ammo === 0
-                ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse border-red-600'
-                : 'bg-white hover:bg-[#ebf5fe] text-[#2c5881] border-[#a8d3f5]'
+                ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse border-red-500 shadow-xs'
+                : 'bg-white hover:bg-neutral-50 text-[#121218] border-white shadow-xs'
             }`}
           >
             {isReloading ? 'Đang Nạp...' : 'Nạp Đạn (R)'}
@@ -656,7 +656,7 @@ export const DuckHunt: React.FC<DuckHuntProps> = ({
       </div>
 
       {/* Main Game Screen Canvas */}
-      <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-3xl overflow-hidden border-4 border-white shadow-lg bg-black">
+      <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl overflow-hidden border border-white/90 shadow-xl bg-neutral-950">
         <canvas
           ref={canvasRef}
           width={800}
@@ -670,55 +670,52 @@ export const DuckHunt: React.FC<DuckHuntProps> = ({
 
         {/* Overlay when game has not started */}
         {!isPlaying && !gameOver && (
-          <div className="absolute inset-0 bg-[#2b4c6e]/40 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center text-white select-none">
-            <div className="w-16 h-16 rounded-2xl bg-white/20 border border-white/40 flex items-center justify-center mb-3 shadow-md animate-bounce">
-              <Target className="w-10 h-10 text-yellow-300" />
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center text-white select-none">
+            <div className="w-12 h-12 rounded-xl bg-white/20 border border-white/40 flex items-center justify-center mb-3 shadow-md">
+              <Target className="w-6 h-6 text-amber-300" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black mb-1 drop-shadow-md">
-              BẮN VỊT ARCADE CỔ ĐIỂN
+            <h2 className="text-2xl sm:text-3xl font-black mb-1.5 drop-shadow-md tracking-tight">
+              DUCK HUNT ARCADE
             </h2>
-            <p className="text-xs sm:text-sm text-blue-100 max-w-md mb-5">
-              Tái hiện game bắn vịt Java cổ điển! Bắn vịt vàng (+100đ), vịt tên lửa (+300đ), vịt vương miện (+500đ & +5s), và cẩn thận né vịt bom!
+            <p className="text-xs sm:text-sm text-neutral-200 max-w-md mb-6 leading-relaxed">
+              Trò chơi bắn vịt cổ điển tốc độ 60 FPS. Nhắm bắn chính xác và phím R để nạp đạn nhanh.
             </p>
             <button
               onClick={startGame}
-              className="y2k-pill-btn px-8 py-3 rounded-2xl bg-gradient-to-r from-[#ffd333] to-[#ff9900] text-[#4a2e00] font-black text-base sm:text-lg flex items-center gap-2 shadow-lg hover:scale-105 border-2 border-white"
+              className="dark-pill-btn px-7 py-3 rounded-xl font-bold text-sm flex items-center gap-2 hover:scale-102"
             >
-              <Play className="w-5 h-5 fill-current" />
-              BẮT ĐẦU BẮN VỊT!
+              <Play className="w-4 h-4 fill-current text-[#fda4af]" />
+              Bắt Đầu Lượt Chơi
             </button>
           </div>
         )}
 
         {/* Game Over Screen */}
         {gameOver && (
-          <div className="absolute inset-0 bg-[#1e3a58]/85 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center text-white select-none">
-            <div className="w-14 h-14 rounded-full bg-yellow-400/20 border border-yellow-300 flex items-center justify-center mb-2 animate-pulse">
-              <Sparkles className="w-8 h-8 text-yellow-300" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black mb-1 text-yellow-300 drop-shadow">
-              HẾT GIỜ! TỔNG KẾT
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center text-white select-none">
+            <h2 className="text-2xl sm:text-3xl font-black mb-1 text-white drop-shadow">
+              KẾT THÚC LƯỢT CHƠI
             </h2>
             
             <div className="grid grid-cols-2 gap-3 my-4 w-full max-w-xs">
-              <div className="p-2.5 rounded-xl bg-white/10 border border-white/20">
-                <span className="block text-[10px] text-blue-200 uppercase font-bold">Điểm Của Bạn</span>
+              <div className="p-3 rounded-xl bg-white/10 border border-white/20">
+                <span className="block text-[10px] text-neutral-300 uppercase font-bold">Điểm Đạt Được</span>
                 <span className="text-2xl font-black text-white">{score}</span>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/10 border border-white/20">
-                <span className="block text-[10px] text-blue-200 uppercase font-bold">Kỷ Lục Cao Nhất</span>
-                <span className="text-2xl font-black text-yellow-300">{Math.max(score, highScore)}</span>
+              <div className="p-3 rounded-xl bg-white/10 border border-white/20">
+                <span className="block text-[10px] text-neutral-300 uppercase font-bold">Kỷ Lục Cao Nhất</span>
+                <span className="text-2xl font-black text-amber-300">{Math.max(score, highScore)}</span>
               </div>
             </div>
 
-            <div className="text-xs text-blue-100 mb-5">
+            <div className="text-xs text-neutral-300 mb-6 font-medium">
               Độ chính xác: {accuracy.shots > 0 ? Math.round((accuracy.hits / accuracy.shots) * 100) : 0}% ({accuracy.hits}/{accuracy.shots} phát)
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-3">
               <button
                 onClick={startGame}
-                className="y2k-pill-btn px-5 py-2.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-extrabold text-sm flex items-center gap-2 border border-white/30"
+                className="px-5 py-2.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm flex items-center gap-2 border border-white/40"
               >
                 <RotateCcw className="w-4 h-4" />
                 Chơi Lại
@@ -730,10 +727,10 @@ export const DuckHunt: React.FC<DuckHuntProps> = ({
                   const title = score > 1500 ? 'Huyền Thoại Bắn Vịt' : score > 800 ? 'Thiện Xạ Bách Phát' : 'Thợ Săn Tập Sự';
                   onSendToPhotobooth(score, title);
                 }}
-                className="y2k-pill-btn px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#ff4766] to-[#ff7b92] text-white font-black text-sm flex items-center gap-2 shadow-lg border-2 border-white hover:scale-105"
+                className="dark-pill-btn px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2"
               >
-                <Camera className="w-4 h-4" />
-                Đưa Chiến Tích Vào Photobooth!
+                <Camera className="w-4 h-4 text-[#ec4899]" />
+                Chụp Ảnh Cùng Kỷ Lục
               </button>
             </div>
           </div>
@@ -741,9 +738,9 @@ export const DuckHunt: React.FC<DuckHuntProps> = ({
       </div>
 
       {/* Guide Note for Mobile & Laptop */}
-      <div className="flex items-center justify-between text-xs text-[#52779a] px-2 font-medium">
-        <span>🎮 <b>Laptop</b>: Rê chuột ngắm, Click chuột bắn, bấm phím Space hoặc R để nạp đạn</span>
-        <span className="hidden sm:inline">📱 <b>Mobile</b>: Chạm trực tiếp vào con vịt trên màn hình để bắn</span>
+      <div className="flex items-center justify-between text-xs text-[#5a6275] px-2 font-medium">
+        <span>Laptop: Rê chuột để ngắm, Click chuột để bắn, phím R để nạp đạn</span>
+        <span className="hidden sm:inline">Mobile: Chạm trực tiếp vào màn hình để bắn</span>
       </div>
     </div>
   );
