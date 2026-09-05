@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, Camera } from 'lucide-react';
+import { Volume2, VolumeX, Camera, RotateCcw } from 'lucide-react';
 import { sounds } from '@/utils/audio';
 
 interface ConsoleHeaderProps {
@@ -9,6 +9,7 @@ interface ConsoleHeaderProps {
   setRoom: (room: 'photobooth' | 'duckhunt' | 'trophy') => void;
   soundEnabled: boolean;
   setSoundEnabled: (enabled: boolean) => void;
+  onResetData?: () => void;
 }
 
 export const ConsoleHeader: React.FC<ConsoleHeaderProps> = ({
@@ -16,6 +17,7 @@ export const ConsoleHeader: React.FC<ConsoleHeaderProps> = ({
   setRoom,
   soundEnabled,
   setSoundEnabled,
+  onResetData,
 }) => {
   const [scrollRatio, setScrollRatio] = useState<number>(0);
 
@@ -147,6 +149,18 @@ export const ConsoleHeader: React.FC<ConsoleHeaderProps> = ({
               </>
             )}
           </button>
+
+          {/* Refresh / Clear LocalStorage Data */}
+          {onResetData && (
+            <button
+              onClick={onResetData}
+              className="px-2.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 text-[#3e4554] hover:text-red-600 hover:bg-white/60 transition-all border border-transparent hover:border-red-200"
+              title="Làm mới & Xóa bộ nhớ LocalStorage (Điểm kỷ lục & số ảnh đã tạo)"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Làm mới</span>
+            </button>
+          )}
 
           {/* Action Button */}
           <button

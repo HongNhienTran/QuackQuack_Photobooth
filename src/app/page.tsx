@@ -6,6 +6,7 @@ import { Sidebar } from '@/components/Sidebar';
 import { Photobooth } from '@/components/Photobooth';
 import { DuckHunt } from '@/components/DuckHunt';
 import { TrophyRoom } from '@/components/TrophyRoom';
+import { ResetConfirmModal } from '@/components/ResetConfirmModal';
 import { Camera, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { sounds } from '@/utils/audio';
 
@@ -15,6 +16,7 @@ export default function Home() {
   const [highScore, setHighScore] = useState<number>(0);
   const [snapsCount, setSnapsCount] = useState<number>(0);
   const [bonusBadge, setBonusBadge] = useState<{ score: number; title: string } | null>(null);
+  const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
 
   // Load stats from LocalStorage
   useEffect(() => {
@@ -60,6 +62,27 @@ export default function Home() {
     setRoom('photobooth');
   };
 
+  // Open the custom reset confirmation modal
+  const handleOpenResetModal = () => {
+    sounds.playPop();
+    setIsResetModalOpen(true);
+  };
+
+  // Perform actual reset and clear all saved localStorage data
+  const handleConfirmReset = () => {
+    try {
+      localStorage.removeItem('quack_high_score');
+      localStorage.removeItem('quack_snaps_count');
+      localStorage.clear();
+      setHighScore(0);
+      setSnapsCount(0);
+      setBonusBadge(null);
+    } catch (e) {
+      console.warn('Clear storage error:', e);
+    }
+    setIsResetModalOpen(false);
+  };
+
   return (
     <div className="relative min-h-screen flex flex-col justify-between selection:bg-purple-200 selection:text-purple-900">
 
@@ -69,6 +92,7 @@ export default function Home() {
         setRoom={setRoom}
         soundEnabled={soundEnabled}
         setSoundEnabled={setSoundEnabled}
+        onResetData={handleOpenResetModal}
       />
 
       {/* 2. Surreal Open Horizon Hero Section */}
@@ -150,6 +174,7 @@ export default function Home() {
                 setRoom={setRoom}
                 highScore={highScore}
                 snapsCount={snapsCount}
+                onResetData={handleOpenResetModal}
               />
             </div>
 
@@ -177,6 +202,7 @@ export default function Home() {
                   onGoToPhotoboothWithTrophy={(title, score) => {
                     handleSendToPhotobooth(score, title);
                   }}
+                  onResetData={handleOpenResetModal}
                 />
               )}
             </div>
@@ -340,6 +366,13 @@ export default function Home() {
           </button>
         </div>
       </div>
+
+      {/* Custom Aesthetic Reset Confirmation Modal */}
+      <ResetConfirmModal
+        isOpen={isResetModalOpen}
+        onClose={() => setIsResetModalOpen(false)}
+        onConfirm={handleConfirmReset}
+      />
 
     </div>
   );

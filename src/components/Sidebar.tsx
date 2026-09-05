@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Camera, Target, Trophy, Sparkles, Music2, Award, Image as ImageIcon } from 'lucide-react';
+import { Camera, Target, Trophy, Sparkles, Music2, Award, Image as ImageIcon, RotateCcw } from 'lucide-react';
 import { VinylPlayer } from './VinylPlayer';
 import { sounds } from '@/utils/audio';
 
@@ -10,6 +10,7 @@ interface SidebarProps {
   setRoom: (room: 'photobooth' | 'duckhunt' | 'trophy') => void;
   highScore: number;
   snapsCount: number;
+  onResetData?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -17,6 +18,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   setRoom,
   highScore,
   snapsCount,
+  onResetData,
 }) => {
   const rooms = [
     {
@@ -145,6 +147,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </span>
           </div>
         </div>
+
+        {/* Reset / Refresh LocalStorage Data */}
+        {onResetData && (
+          <button
+            onClick={onResetData}
+            className="w-full py-2 px-3 text-xs font-semibold text-[#52596d] hover:text-red-600 bg-white/40 hover:bg-white/70 transition-all border border-white/70 flex items-center justify-center gap-1.5 shadow-xs"
+            title="Làm mới và xóa bộ nhớ LocalStorage"
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-current" />
+            <span>Làm mới bộ nhớ (Reset)</span>
+          </button>
+        )}
       </div>
     </aside>
   );
